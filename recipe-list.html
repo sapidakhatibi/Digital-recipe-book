@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>لیست غذاها</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      direction: rtl;
+      background-color: #fffdf7;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00695c;
+    }
+
+    .filter-section {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+
+    .recipe-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .recipe-card {
+      background-color: #e0f2f1;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .recipe-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .recipe-card h3 {
+      margin: 10px 0 5px;
+      color: #004d40;
+    }
+
+    .recipe-card p {
+      color: #444;
+      font-size: 0.95em;
+    }
+
+    .recipe-card a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: white;
+      background-color: #00796b;
+      padding: 8px 16px;
+      border-radius: 5px;
+    }
+
+    .recipe-card a:hover {
+      background-color: #004d40;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>لیست غذاهای افغانی</h1>
+
+  <div class="filter-section">
+    <label for="category">فیلتر براساس دسته‌بندی:</label>
+    <select id="category" onchange="filterRecipes()">
+      <option value="همه">همه</option>
+      <option value="قابلی">قابلی</option>
+      <option value="منتو">منتو</option>
+      <option value="آشک">آشک</option>
+      <option value="بولانی">بولانی</option>
+      <option value="کباب">کباب</option>
+      <option value="شیرینی‌جات">شیرینی‌جات</option>
+    </select>
+  </div>
+
+  <div class="recipe-list" id="recipeContainer">
+    <!-- کارت‌های غذا اینجا قرار می‌گیرند -->
+  </div>
+
+  <script>
+    const recipes = [
+      {
+        name: "قابلی پلو",
+        image: "processed-162.jpeg",
+        description: "برنج مجلسی با گوشت و کشمش و زردک.",
+        category: "قابلی"
+      },
+      {
+        name: "منتو",
+        image: "OIP.jpeg",
+        description: "خمیری پر شده با گوشت و پیاز، بخارپز.",
+        category: "منتو"
+      },
+      {
+        name: "بولانی",
+        image: "boulani.jpg",
+        description: "نان نازک پر شده با سبزی یا کچالو.",
+        category: "بولانی"
+      }
+      // اینجا می‌تونی غذاهای بیشتری اضافه کنی
+    ];
+
+    function displayRecipes(list) {
+      const container = document.getElementById("recipeContainer");
+      container.innerHTML = "";
+      list.forEach(recipe => {
+        const card = `
+          <div class="recipe-card">
+            <img src="${recipe.image}" alt="${recipe.name}">
+            <h3>${recipe.name}</h3>
+            <p>${recipe.description}</p>
+            <a href="recipe-details.html">مشاهده کامل</a>
+          </div>
+        `;
+        container.innerHTML += card;
+      });
+    }
+
+    function filterRecipes() {
+      const category = document.getElementById("category").value;
+      if (category === "همه") {
+        displayRecipes(recipes);
+      } else {
+        const filtered = recipes.filter(r => r.category === category);
+        displayRecipes(filtered);
+      }
+    }
+
+    // بارگذاری اولیه
+    window.onload = () => {
+      displayRecipes(recipes);
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>افزودن غذای جدید</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #fefefe;
+      padding: 30px;
+      direction: rtl;
+    }
+
+    h1 {
+      color: #7b1fa2;
+      text-align: center;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #f3e5f5;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #4a148c;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #7b1fa2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4a148c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>افزودن غذای جدید</h1>
+
+  <form id="recipeForm">
+    <label for="name">نام غذا:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="ingredients">مواد لازم:</label>
+    <textarea id="ingredients" name="ingredients" required></textarea>
+
+    <label for="instructions">طرز تهیه:</label>
+    <textarea id="instructions" name="instructions" required></textarea>
+
+    <label for="image">لینک تصویر غذا:</label>
+    <input type="text" id="image" name="image" placeholder="https://example.com/image.jpg" required>
+
+    <label for="category">دسته‌بندی غذا:</label>
+    <select id="category" name="category" required>
+      <option value="">-- انتخاب کنید --</option>
+      <option value="قابلی">قابلی</option>
+      <option value="منتو">منتو</option>
+      <option value="آشک">آشک</option>
+      <option value="بولانی">بولانی</option>
+      <option value="کباب">کباب</option>
+      <option value="شیرینی‌جات">شیرینی‌جات</option>
+    </select>
+
+    <button type="submit">ثبت غذا</button>
+  </form>
+
+  <script>
+    document.getElementById("recipeForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const ingredients = document.getElementById("ingredients").value.trim();
+      const instructions = document.getElementById("instructions").value.trim();
+      const image = document.getElementById("image").value.trim();
+      const category = document.getElementById("category").value;
+
+      if (!name  !ingredients  !instructions  !image  !category) {
+        alert("لطفاً تمام فیلدها را کامل کنید.");
+        return;
+      }
+
+      alert("غذا با موفقیت ثبت شد!");
+
+      // می‌تونی اینجا ذخیره‌سازی در localStorage یا ارسال به سرور انجام بدی.
+      // برای پروژه ساده، فعلاً فقط هشدار نمایش داده می‌شه.
+    });
+  </script>
+
+</body>
+</html>
